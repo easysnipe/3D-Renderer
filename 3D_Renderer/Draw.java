@@ -33,17 +33,23 @@ public class Draw implements KeyListener
     {
         if (e.getKeyChar() == 'a')
         {
+            focalLength++;
         } 
         else if (e.getKeyChar() == 's')
         {
+            focalLength--;
         }
-        cO.setX3(1);
-        cO.setY3(1);
-        cO.setZ3(1);
-        c.setX3(1);
-        c.setY3(1);
-        c.setZ3(1);
-        DrawShapes(c, cO);
+        // cO.setX3(1);
+        // cO.setY3(1);
+        // cO.setZ3(1);
+        // c.setX3(1);
+        // c.setY3(1);
+        // c.setZ3(1);
+        while (true)
+        {
+            DrawShapes(c, cO);
+            focalLength++;
+        }
     }
     public void keyReleased(KeyEvent e)
     {
