@@ -14,7 +14,7 @@ public class Cube extends Prisim
         points[2] = new Point(scale * -1,scale,scale); 
         points[3] = new Point(scale * -1,scale,scale * -1); 
         points[4] = new Point(scale * -1,scale * -1,scale); 
-        points[5] = new Point(scale * -1,scale * -1,scale * -1); 
+        points[5] = new Point(scale * -1,scale * -1,scale * -1 ); 
         points[6] = new Point(scale,scale * -1,scale * -1); 
         points[7] = new Point(scale,scale * -1,scale); 
     }
