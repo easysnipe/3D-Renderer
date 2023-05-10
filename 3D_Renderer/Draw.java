@@ -17,7 +17,7 @@ public class Draw implements KeyListener
         d = new Point(0,0,0);
         cO = new Point(0,0,0);
         c = new Point(0,0,0);
-        focalLength = 5;
+        focalLength = 70;
         win = new JFrame("3D Renderer");
         win.setSize(1920,1080);
         win.setLocation(0,0);
@@ -31,14 +31,23 @@ public class Draw implements KeyListener
     }
     public void keyPressed(KeyEvent e)
     {
+        // d.setX3(1);
+        // d.setY3(1);
+        // d.setZ3(1);
+        // cO.setX3(1);
+        // cO.setY3(1);
+        // cO.setZ3(1);
+        // c.setX3(1);
+        // c.setY3(1);
+        // c.setZ3(1);
         System.out.println(e.getKeyChar());
         if (e.getKeyChar() == 'a')
         {
-            DrawShapes(d, c, c);
+            DrawShapes(d, c, cO);
         } 
         else if (e.getKeyChar() == 's')
         {
-            DrawShapes(d, c, c);
+            DrawShapes(d, c, cO);
         }
         else if (e.getKeyChar() == 'd')
         {
@@ -60,15 +69,7 @@ public class Draw implements KeyListener
             g.drawLine((int)lines[currentLine].getPointA().getX2(), (int)lines[currentLine].getPointA().getY2(), (int)lines[currentLine].getPointB().getX2(), (int)lines[currentLine].getPointB().getY2());
 
         }
-        d.setX3(100);
-        d.setY3(1);
-        d.setZ3(1);
-        cO.setX3(1);
-        cO.setY3(1);
-        cO.setZ3(1);
-        c.setX3(1);
-        c.setY3(1);
-        c.setZ3(1);
+        
         
     }
     public void keyReleased(KeyEvent e)

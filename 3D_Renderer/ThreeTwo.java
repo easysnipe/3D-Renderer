@@ -27,5 +27,7 @@ public class ThreeTwo
     {
         point.setX2((focalLength * point.getX3())/(focalLength + point.getZ3()) + 1920/2);
         point.setY2((focalLength * point.getY3())/(focalLength + point.getZ3()) + 1080/2);
+        // point.setX2((focalLength * point.getX3())/(focalLength + point.getZ3() + 1920/2));
+        // point.setY2((focalLength * point.getY3())/(focalLength + point.getZ3() + 1080/2));
     }
 }
