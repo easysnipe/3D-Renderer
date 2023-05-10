@@ -17,7 +17,7 @@ public class Draw implements KeyListener
         d = new Point(0,0,0);
         cO = new Point(0,0,0);
         c = new Point(0,0,0);
-        focalLength = 70;
+        focalLength = 5;
         win = new JFrame("3D Renderer");
         win.setSize(1920,1080);
         win.setLocation(0,0);
@@ -86,7 +86,7 @@ public class Draw implements KeyListener
         d = display;
         cO = camOrientation;
         c = cam;
-        // shape.CreatePerspective(c, cO);
+        shape.CreatePerspective(c, cO);
         shape.ConvertTo2D(focalLength, 0, 0);
         shape.createLines();
         Line[] lines = shape.getLines();
