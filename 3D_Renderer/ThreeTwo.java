@@ -23,4 +23,9 @@ public class ThreeTwo
         point.setX2(((screen.getZ3()/point.getZ3()) * point.getX3()) + screen.getX3());
         point.setY2(((screen.getZ3()/point.getZ3()) * point.getY3()) + screen.getY3());
     }
+    public static void To2DPointSimple(Point point, double focalLength)
+    {
+        point.setX2((focalLength * point.getX3())/(focalLength + point.getZ3()) + 1920/2);
+        point.setY2((focalLength * point.getY3())/(focalLength + point.getZ3()) + 1080/2);
+    }
 }

@@ -1,7 +1,8 @@
 public class Main
 {
-    public static void main(String[]args)
+    public static void main(String[]args) throws InterruptedException
     {
-        Prism cube = new Cube
+        Prisim cube = new Cube(100);
+        Draw threeD = new Draw(cube);
     }
 }
