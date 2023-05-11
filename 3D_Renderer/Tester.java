@@ -21,7 +21,7 @@ public class Tester
     {
         Point a = new Point(3,6,2);
         Point c = new Point(10,1,10);
-        Point o = new Point(0,0,0);
+        Point o = new Point(11,11,11);
         Point e = new Point(100,0,100);
         ThreeTwo.CalcPerspective(a , c, o);
         ThreeTwo.To2DPointSimple(a, 2);

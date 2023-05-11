@@ -20,12 +20,12 @@ public class ThreeTwo
     }
     public static void To2DPoint(Point point, Point screen)
     {
-        point.setX2(((screen.getZ3()/point.getZ3()) * point.getX3()) + screen.getX3());
-        point.setY2(((screen.getZ3()/point.getZ3()) * point.getY3()) + screen.getY3());
+        point.setX2((((screen.getZ3()/point.getZ3()) * point.getX3()) + screen.getX3()) + (1920/2 -200));
+        point.setY2((((screen.getZ3()/point.getZ3()) * point.getY3()) + screen.getY3()) + (1080/2 - 200));
     }
     public static void To2DPointSimple(Point point, double focalLength)
     {
-        point.setX2((int)((focalLength * point.getX3())/(focalLength + point.getZ3()) + 1920/2));
-        point.setY2((int)((focalLength * point.getY3())/(focalLength + point.getZ3()) + 1080/2));
+        point.setX2((int)((focalLength * point.getX3())/(focalLength + point.getZ3()) + (1920/2 - 200)));
+        point.setY2((int)((focalLength * point.getY3())/(focalLength + point.getZ3()) + (1080/2 - 200)));
     }
 }

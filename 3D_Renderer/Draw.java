@@ -12,11 +12,12 @@ public class Draw implements KeyListener
     private Prisim shape;
     private Point d, cO, c;
     private double focalLength;
+    private int xAdd;
     public Draw(Prisim object) throws InterruptedException
     {
-        d = new Point(0,0,0);
+        d = new Point(500,100,200);
         cO = new Point(0,0,0);
-        c = new Point(0,10,200);
+        c = new Point(0,0,0);
         focalLength = 200;
         win = new JFrame("3D Renderer");
         win.setSize(1920,1080);
@@ -27,21 +28,19 @@ public class Draw implements KeyListener
         win.addKeyListener(this);
         shape = object;
         TimeUnit.MILLISECONDS.sleep(100);
-        DrawShapes(cO, c);
+        int xAdd = 0;
+        DrawShapes(cO, c, xAdd);
         win.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
     public void keyPressed(KeyEvent e) 
     {
-        contentPane.removeAll();
-        contentPane.revalidate();
-        contentPane.repaint();
         if (e.getKeyChar() == 'a')
         {
-            c.setX3(c.getX3() + 1);
+            c.setX3(c.getX3() + 10);
         } 
         else if (e.getKeyChar() == 's')
         {
-            c.setX3(c.getX3() - 1);
+            c.setX3(c.getX3() - 10);
         }
         else if (e.getKeyChar() == 'd')
         {
@@ -61,38 +60,42 @@ public class Draw implements KeyListener
         }
         else if (e.getKeyChar() == 'z')
         {
-            focalLength++;
+            focalLength-=10;
         }
         else if (e.getKeyChar() == 'x')
         {
-            focalLength--;
+            focalLength+=10;
         }
-        contentPane = win.getContentPane();
-        g = contentPane.getGraphics();
-        DrawShapes(cO, c);
-        
-    
-        // Instant start = Instant.now();
-        // while(Instant.now().toEpochMilli() < (start.toEpochMilli() + 1000))
-        // {
-
-        // }
-        
-
+        else if (e.getKeyChar() == 'o')
+        {
+            xAdd+=10;
+        }
+        else if (e.getKeyChar() == 'p')
+        {
+            xAdd-=10;
+        }
+        contentPane.removeAll();
+        contentPane.revalidate();
+        contentPane.repaint();
     }
     public void keyReleased(KeyEvent e)
     {
+        DrawShapes(cO, c, xAdd);
     }
     public void keyTyped(KeyEvent e)
     {
+        // DrawShapes(cO, c, xAdd);
     }
-    public void DrawShapes( Point camOrientation, Point cam) 
+    public void DrawShapes( Point camOrientation, Point cam, int addX) 
     {
-        shape.create3dPoints();
+        g.drawString("Focal Length: " + focalLength, 20,20);
+        g.drawString("AddX: " + addX, 20,35);
+        g.drawString("Camera: (" + cam.getX3() + " ," + cam.getY3() + " ," + cam.getZ3() + " )", 20, 45);
+        shape.create3dPoints(addX);
         cO = camOrientation;
         c = cam;
         shape.CreatePerspective(c, cO);
-        shape.ConvertTo2D(focalLength, 0, 0);
+        shape.ConvertTo2D(d, 0, 0);
         shape.createLines();
         Line[] lines = shape.getLines();
         System.out.println(lines[0].getPointA().getX2());

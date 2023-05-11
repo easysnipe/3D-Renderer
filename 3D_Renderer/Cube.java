@@ -6,24 +6,17 @@ public class Cube extends Prisim
         points = new Point[8];
         edges = new Line[12];
     }
-    public void create3dPoints()
+    public void create3dPoints(int xAdd)
     {
         System.out.println("Scale : " + scale);
-        points[0] = new Point(scale,scale,scale); 
-        points[1] = new Point(scale,scale,scale * -1); 
-        points[2] = new Point(scale * -1,scale,scale); 
-        points[3] = new Point(scale * -1,scale,scale * -1); 
-        points[4] = new Point(scale * -1,scale * -1,scale); 
-        points[5] = new Point(scale * -1,scale * -1,scale * -1 ); 
-        points[6] = new Point(scale,scale * -1,scale * -1); 
-        points[7] = new Point(scale,scale * -1,scale); 
-        for (Point point : points)
-        {
-            System.out.print("3D X value: " + point.getX3());
-            System.out.print(" 3D Y value: " + point.getY3());
-            System.out.print(" 3D Z value: " + point.getZ3());
-            System.out.println("");
-        }
+        points[0] = new Point(scale,scale,scale + xAdd); 
+        points[1] = new Point(scale,scale,scale * -1 + xAdd); 
+        points[2] = new Point(scale * -1,scale,scale + xAdd); 
+        points[3] = new Point(scale * -1,scale,scale * -1 + xAdd); 
+        points[4] = new Point(scale * -1,scale * -1,scale + xAdd); 
+        points[5] = new Point(scale * -1,scale * -1,scale * -1  + xAdd); 
+        points[6] = new Point(scale,scale * -1,scale * -1 + xAdd); 
+        points[7] = new Point(scale,scale * -1,scale + xAdd); 
     }
     public void createLines()
     {
