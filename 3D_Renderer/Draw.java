@@ -2,6 +2,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.util.concurrent.TimeUnit;
 import java.awt.event.*;
+import java.time.Instant;
 
 public class Draw implements KeyListener
 {
@@ -15,8 +16,8 @@ public class Draw implements KeyListener
     {
         d = new Point(0,0,0);
         cO = new Point(0,0,0);
-        c = new Point(200,210,200);
-        focalLength = 100;
+        c = new Point(0,10,200);
+        focalLength = 200;
         win = new JFrame("3D Renderer");
         win.setSize(1920,1080);
         win.setLocation(0,0);
@@ -27,18 +28,56 @@ public class Draw implements KeyListener
         shape = object;
         TimeUnit.MILLISECONDS.sleep(100);
         DrawShapes(cO, c);
-        
+        win.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
-    public void keyPressed(KeyEvent e)
+    public void keyPressed(KeyEvent e) 
     {
+        contentPane.removeAll();
+        contentPane.revalidate();
+        contentPane.repaint();
         if (e.getKeyChar() == 'a')
         {
-            focalLength++;
+            c.setX3(c.getX3() + 1);
         } 
         else if (e.getKeyChar() == 's')
         {
+            c.setX3(c.getX3() - 1);
+        }
+        else if (e.getKeyChar() == 'd')
+        {
+            c.setY3(c.getY3() + 1);
+        }
+        else if (e.getKeyChar() == 'f')
+        {
+            c.setY3(c.getY3() - 1);
+        }
+        else if (e.getKeyChar() == 'g')
+        {
+            c.setZ3(c.getZ3() + 1);
+        }
+        else if (e.getKeyChar() == 'h')
+        {
+            c.setZ3(c.getZ3() - 1);
+        }
+        else if (e.getKeyChar() == 'z')
+        {
+            focalLength++;
+        }
+        else if (e.getKeyChar() == 'x')
+        {
             focalLength--;
         }
+        contentPane = win.getContentPane();
+        g = contentPane.getGraphics();
+        DrawShapes(cO, c);
+        
+    
+        // Instant start = Instant.now();
+        // while(Instant.now().toEpochMilli() < (start.toEpochMilli() + 1000))
+        // {
+
+        // }
+        
 
     }
     public void keyReleased(KeyEvent e)
@@ -47,7 +86,7 @@ public class Draw implements KeyListener
     public void keyTyped(KeyEvent e)
     {
     }
-    public void DrawShapes( Point camOrientation, Point cam)
+    public void DrawShapes( Point camOrientation, Point cam) 
     {
         shape.create3dPoints();
         cO = camOrientation;
