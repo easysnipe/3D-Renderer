@@ -17,6 +17,13 @@ public class Cube extends Prisim
         points[5] = new Point(scale * -1,scale * -1,scale * -1 ); 
         points[6] = new Point(scale,scale * -1,scale * -1); 
         points[7] = new Point(scale,scale * -1,scale); 
+        for (Point point : points)
+        {
+            System.out.print("3D X value: " + point.getX3());
+            System.out.print(" 3D Y value: " + point.getY3());
+            System.out.print(" 3D Z value: " + point.getZ3());
+            System.out.println("");
+        }
     }
     public void createLines()
     {

@@ -24,7 +24,7 @@ public class Tester
         Point o = new Point(0,0,0);
         Point e = new Point(100,0,100);
         ThreeTwo.CalcPerspective(a , c, o);
-        ThreeTwo.To2DPointSimple(a, 1);
+        ThreeTwo.To2DPointSimple(a, 2);
         System.out.println("3D X value: " + a.getX3());
         System.out.println("3D Y value: " + a.getY3());
         System.out.println("3D Z value: " + a.getZ3());

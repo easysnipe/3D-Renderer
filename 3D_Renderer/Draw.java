@@ -15,8 +15,8 @@ public class Draw implements KeyListener
     {
         d = new Point(0,0,0);
         cO = new Point(0,0,0);
-        c = new Point(0,0,0);
-        focalLength = 1;
+        c = new Point(200,210,200);
+        focalLength = 100;
         win = new JFrame("3D Renderer");
         win.setSize(1920,1080);
         win.setLocation(0,0);
@@ -26,7 +26,7 @@ public class Draw implements KeyListener
         win.addKeyListener(this);
         shape = object;
         TimeUnit.MILLISECONDS.sleep(100);
-        DrawShapes(c, cO);
+        DrawShapes(cO, c);
         
     }
     public void keyPressed(KeyEvent e)
@@ -39,17 +39,7 @@ public class Draw implements KeyListener
         {
             focalLength--;
         }
-        // cO.setX3(1);
-        // cO.setY3(1);
-        // cO.setZ3(1);
-        // c.setX3(1);
-        // c.setY3(1);
-        // c.setZ3(1);
-        while (true)
-        {
-            DrawShapes(c, cO);
-            focalLength++;
-        }
+
     }
     public void keyReleased(KeyEvent e)
     {

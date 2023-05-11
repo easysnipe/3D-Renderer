@@ -1,9 +1,9 @@
 public class MatrixMult 
 {
-    public static int[][] mult(int[][] a, int[][] b)
+    public static double[][] mult(double[][] a, double[][] b)
     {
-        int[][] matrix = new int[a.length][b[0].length];
-        int sum = 0;
+        double[][] matrix = new double[a.length][b[0].length];
+        double sum = 0;
         for (int i = 0; i < b[0].length; i++)//Move to next collum in b array
         {
             for (int o = 0; o < a.length; o++)//Move to next row in a array
