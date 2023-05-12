@@ -3,7 +3,7 @@ import java.awt.event.KeyEvent;
 
 public class KeyInputs implements KeyListener
 {
-    public boolean aPress, sPress, dPress, fPress, gPress, hPress, zPress, xPress, oPress, pPress;
+    public boolean aPress, sPress, dPress, fPress, gPress, hPress, zPress, xPress, jPress, kPress, lPress, semiPress, cPress, vPress, bPress, nPress, mPress, colPress, backPress;
     public void keyTyped(KeyEvent e) {}
     public void keyPressed(KeyEvent e)
     {
@@ -33,6 +33,22 @@ public class KeyInputs implements KeyListener
         {
             hPress = true;
         }
+        if (code == KeyEvent.VK_J)
+        {
+            jPress = true;
+        }
+        if (code == KeyEvent.VK_K)
+        {
+            kPress = true;
+        }
+        if (code == KeyEvent.VK_L)
+        {
+            lPress = true;
+        }
+        if (code == KeyEvent.VK_SEMICOLON)
+        {
+            semiPress = true;
+        }
         if (code == KeyEvent.VK_Z)
         {
             zPress = true;
@@ -41,18 +57,39 @@ public class KeyInputs implements KeyListener
         {
             xPress = true;
         }
-        if (code == KeyEvent.VK_O)
+        if (code == KeyEvent.VK_C)
         {
-            oPress = true;
+            cPress = true;
         }
-        if (code == KeyEvent.VK_P)
+        if (code == KeyEvent.VK_V)
         {
-            pPress = true;
+            vPress = true;
+        }
+        if (code == KeyEvent.VK_B)
+        {
+            bPress = true;
+        }
+        if (code == KeyEvent.VK_N)
+        {
+            nPress = true;
+        }
+        if (code == KeyEvent.VK_M)
+        {
+            mPress = true;
+        }
+        if (code == KeyEvent.VK_COLON)
+        {
+            colPress = true;
+        }
+        if (code == KeyEvent.VK_BACK_SPACE)
+        {
+            backPress = true;
         }
     }
     public void keyReleased(KeyEvent e)
     {
         int code = e.getKeyCode();
+        
         if (code == KeyEvent.VK_A)
         {
             aPress = false;
@@ -77,6 +114,22 @@ public class KeyInputs implements KeyListener
         {
             hPress = false;
         }
+        if (code == KeyEvent.VK_J)
+        {
+            jPress = false;
+        }
+        if (code == KeyEvent.VK_K)
+        {
+            kPress = false;
+        }
+        if (code == KeyEvent.VK_L)
+        {
+            lPress = false;
+        }
+        if (code == KeyEvent.VK_SEMICOLON)
+        {
+            semiPress = false;
+        }
         if (code == KeyEvent.VK_Z)
         {
             zPress = false;
@@ -85,13 +138,33 @@ public class KeyInputs implements KeyListener
         {
             xPress = false;
         }
-        if (code == KeyEvent.VK_O)
+        if (code == KeyEvent.VK_C)
         {
-            oPress = false;
+            cPress = false;
         }
-        if (code == KeyEvent.VK_P)
+        if (code == KeyEvent.VK_V)
         {
-            pPress = false;
+            vPress = false;
+        }
+        if (code == KeyEvent.VK_B)
+        {
+            bPress = false;
+        }
+        if (code == KeyEvent.VK_N)
+        {
+            nPress = false;
+        }
+        if (code == KeyEvent.VK_M)
+        {
+            mPress = false;
+        }
+        if (code == KeyEvent.VK_COLON)
+        {
+            colPress = false;
+        }
+        if (code == KeyEvent.VK_BACK_SPACE)
+        {
+            backPress = false;
         }
     }
 }

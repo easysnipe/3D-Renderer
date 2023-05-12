@@ -27,7 +27,7 @@ public class Draw extends JPanel implements Runnable
 
         //Set default values
         shape = object;
-        d = new Point(500,100,200); 
+        d = new Point(0,0,200); 
         cO = new Point(0,0,0); 
         c = new Point(0,0,0); 
         int xAdd = 0;
@@ -40,14 +40,20 @@ public class Draw extends JPanel implements Runnable
     }
     public void run() 
     {
+        int loopsPassed = 0;
         double interval = 1000000000/FPS;
         double draw = System.nanoTime() + interval;
 
         while(drawThread != null)
         {
+            loopsPassed++;
+            if (loopsPassed >= 10)
+            {
+                loopsPassed = 0;
+                update();
+                repaint();
+            }
             long time = System.nanoTime();
-            update();
-            repaint();
 
             double timeLeft = draw - System.nanoTime();
             timeLeft = timeLeft/1000000;
@@ -57,6 +63,7 @@ public class Draw extends JPanel implements Runnable
             }
             try
             {
+                System.out.println(timeLeft);
                 Thread.sleep((long)timeLeft);
                 draw += interval;
             }
@@ -67,11 +74,11 @@ public class Draw extends JPanel implements Runnable
     {
         if (keyI.aPress)
         {
-            c.setX3(c.getX3() + 10);
+            c.setX3(c.getX3() + 1);
         } 
         else if (keyI.sPress)
         {
-            c.setX3(c.getX3() - 10);
+            c.setX3(c.getX3() - 1);
         }
         else if (keyI.dPress)
         {
@@ -89,29 +96,67 @@ public class Draw extends JPanel implements Runnable
         {
             c.setZ3(c.getZ3() - 1);
         }
-        else if (keyI.zPress)
+        else if (keyI.jPress)
         {
-            focalLength++;
+            d.setX3(d.getX3() + 1);
         }
+        else if (keyI.kPress)
+        {
+            d.setX3(d.getX3() - 1);
+        }
+        else if (keyI.lPress)
+        {
+            d.setY3(d.getY3() + 1);
+        }
+        else if (keyI.semiPress)
+        {
+            d.setY3(d.getY3() - 1);
+        }
+        if (keyI.zPress)
+        {
+            d.setZ3(d.getZ3() + 1);
+        } 
         else if (keyI.xPress)
         {
-            focalLength++;
+            d.setZ3(d.getZ3() - 1);
         }
-        else if (keyI.oPress)
+        else if (keyI.cPress)
         {
-            xAdd++;
+            cO.setX3(cO.getX3() + 1);
         }
-        else if (keyI.pPress)
+        else if (keyI.vPress)
         {
-            xAdd++;
+            cO.setX3(cO.getX3() - 1);
+        }
+        else if (keyI.bPress)
+        {
+            cO.setY3(cO.getY3() + 1);
+        }
+        else if (keyI.nPress)
+        {
+            cO.setY3(cO.getY3() - 1);
+        }
+        else if (keyI.mPress)
+        {
+            cO.setZ3(cO.getX3() + 1);
+        }
+        else if (keyI.colPress)
+        {
+            cO.setZ3(cO.getX3() - 1);
+        }
+        else if (keyI.backPress)
+        {
+            d = new Point(0,0,200); 
+            cO = new Point(0,0,0); 
+            c = new Point(0,0,0); 
         }
     }
     public void paintComponent(Graphics g) 
     {
         super.paintComponent(g);
 
-        g.drawString("Focal Length: " + focalLength, 20,20);
-        g.drawString("AddX: " + xAdd, 20,35);
+        g.drawString("Dispaly: (" + d.getX3() + " ," + d.getY3() + " ," + d.getZ3() + " )", 20,20);
+        g.drawString("Camera Angle: (" + cO.getX3() + " ," + cO.getY3() + " ," + cO.getZ3() + " )", 20,35);
         g.drawString("Camera: (" + c.getX3() + " ," + c.getY3() + " ," + c.getZ3() + " )", 20, 50);
 
         shape.create3dPoints(xAdd);
@@ -123,10 +168,11 @@ public class Draw extends JPanel implements Runnable
         //System.out.println(lines[0].getPointA().getX2());
 
         g.setColor(new Color(0,0,0));
-        // for (Point P : shape.getPoints())
-        // {
-        //     System.out.println("(" + P.getX2() + " ," + P.getY2() + ")");
-        // }
+        System.out.println("\n");
+        for (Point P : shape.getPoints())
+        {
+            System.out.println("(" + P.getX2() + " ," + P.getY2() + ")");
+        }
         for (Line line : lines)
         {
             g.drawLine((int)line.getPointA().getX2(), (int)line.getPointA().getY2(), (int)line.getPointB().getX2(), (int)line.getPointB().getY2());
