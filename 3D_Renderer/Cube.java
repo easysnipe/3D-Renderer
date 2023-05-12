@@ -8,7 +8,7 @@ public class Cube extends Prisim
     }
     public void create3dPoints(int xAdd)
     {
-        System.out.println("Scale : " + scale);
+        //System.out.println("Scale : " + scale);
         points[0] = new Point(scale,scale,scale + xAdd); 
         points[1] = new Point(scale,scale,scale * -1 + xAdd); 
         points[2] = new Point(scale * -1,scale,scale + xAdd); 

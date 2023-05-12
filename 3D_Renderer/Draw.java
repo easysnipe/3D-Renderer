@@ -2,111 +2,135 @@ import java.awt.*;
 import javax.swing.*;
 import java.util.concurrent.TimeUnit;
 import java.awt.event.*;
-import java.time.Instant;
 
-public class Draw implements KeyListener
+public class Draw extends JPanel implements Runnable
 {
-    private JFrame win;
-    private Container contentPane;
     private Graphics g;
     private Prisim shape;
     private Point d, cO, c;
     private double focalLength;
     private int xAdd;
+    private Thread drawThread;
+    private KeyInputs keyI = new KeyInputs();
+    private final int FPS = 60;
     public Draw(Prisim object) throws InterruptedException
     {
-        d = new Point(500,100,200);
-        cO = new Point(0,0,0);
-        c = new Point(0,0,0);
-        focalLength = 200;
-        win = new JFrame("3D Renderer");
-        win.setSize(1920,1080);
-        win.setLocation(0,0);
-        win.setVisible(true);
-        contentPane = win.getContentPane();
-        g = contentPane.getGraphics();
-        win.addKeyListener(this);
-        shape = object;
+        //Create window and add needed functions
+        this.setPreferredSize(new Dimension(1920,1080));
+        this.setLocation(0,0);
+        this.setDoubleBuffered(true);
+
         TimeUnit.MILLISECONDS.sleep(100);
+        this.addKeyListener(keyI);
+        this.setFocusable(true);
+        this.requestFocus();
+
+        //Set default values
+        shape = object;
+        d = new Point(500,100,200); 
+        cO = new Point(0,0,0); 
+        c = new Point(0,0,0); 
         int xAdd = 0;
-        DrawShapes(cO, c, xAdd);
-        win.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
     }
-    public void keyPressed(KeyEvent e) 
+    public void startDrawThread()
     {
-        if (e.getKeyChar() == 'a')
+        drawThread = new Thread(this);   
+        drawThread.start();
+    }
+    public void run() 
+    {
+        double interval = 1000000000/FPS;
+        double draw = System.nanoTime() + interval;
+
+        while(drawThread != null)
+        {
+            long time = System.nanoTime();
+            update();
+            repaint();
+
+            double timeLeft = draw - System.nanoTime();
+            timeLeft = timeLeft/1000000;
+            if (timeLeft < 0)
+            {
+                timeLeft = 0;
+            }
+            try
+            {
+                Thread.sleep((long)timeLeft);
+                draw += interval;
+            }
+            catch (InterruptedException e) {}
+        }
+    }
+    public void update()
+    {
+        if (keyI.aPress)
         {
             c.setX3(c.getX3() + 10);
         } 
-        else if (e.getKeyChar() == 's')
+        else if (keyI.sPress)
         {
             c.setX3(c.getX3() - 10);
         }
-        else if (e.getKeyChar() == 'd')
+        else if (keyI.dPress)
         {
             c.setY3(c.getY3() + 1);
         }
-        else if (e.getKeyChar() == 'f')
+        else if (keyI.fPress)
         {
             c.setY3(c.getY3() - 1);
         }
-        else if (e.getKeyChar() == 'g')
+        else if (keyI.gPress)
         {
             c.setZ3(c.getZ3() + 1);
         }
-        else if (e.getKeyChar() == 'h')
+        else if (keyI.hPress)
         {
             c.setZ3(c.getZ3() - 1);
         }
-        else if (e.getKeyChar() == 'z')
+        else if (keyI.zPress)
         {
-            focalLength-=10;
+            focalLength++;
         }
-        else if (e.getKeyChar() == 'x')
+        else if (keyI.xPress)
         {
-            focalLength+=10;
+            focalLength++;
         }
-        else if (e.getKeyChar() == 'o')
+        else if (keyI.oPress)
         {
-            xAdd+=10;
+            xAdd++;
         }
-        else if (e.getKeyChar() == 'p')
+        else if (keyI.pPress)
         {
-            xAdd-=10;
+            xAdd++;
         }
-        contentPane.removeAll();
-        contentPane.revalidate();
-        contentPane.repaint();
     }
-    public void keyReleased(KeyEvent e)
+    public void paintComponent(Graphics g) 
     {
-        DrawShapes(cO, c, xAdd);
-    }
-    public void keyTyped(KeyEvent e)
-    {
-        // DrawShapes(cO, c, xAdd);
-    }
-    public void DrawShapes( Point camOrientation, Point cam, int addX) 
-    {
+        super.paintComponent(g);
+
         g.drawString("Focal Length: " + focalLength, 20,20);
-        g.drawString("AddX: " + addX, 20,35);
-        g.drawString("Camera: (" + cam.getX3() + " ," + cam.getY3() + " ," + cam.getZ3() + " )", 20, 45);
-        shape.create3dPoints(addX);
-        cO = camOrientation;
-        c = cam;
+        g.drawString("AddX: " + xAdd, 20,35);
+        g.drawString("Camera: (" + c.getX3() + " ," + c.getY3() + " ," + c.getZ3() + " )", 20, 50);
+
+        shape.create3dPoints(xAdd);
         shape.CreatePerspective(c, cO);
         shape.ConvertTo2D(d, 0, 0);
         shape.createLines();
         Line[] lines = shape.getLines();
-        System.out.println(lines[0].getPointA().getX2());
+
+        //System.out.println(lines[0].getPointA().getX2());
+
         g.setColor(new Color(0,0,0));
-        for (Point P : shape.getPoints())
-        {
-            System.out.println("(" + P.getX2() + " ," + P.getY2() + ")");
-        }
+        // for (Point P : shape.getPoints())
+        // {
+        //     System.out.println("(" + P.getX2() + " ," + P.getY2() + ")");
+        // }
         for (Line line : lines)
         {
             g.drawLine((int)line.getPointA().getX2(), (int)line.getPointA().getY2(), (int)line.getPointB().getX2(), (int)line.getPointB().getY2());
         }
+        g.dispose();
     }
 }   

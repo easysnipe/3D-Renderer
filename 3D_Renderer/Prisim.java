@@ -9,17 +9,17 @@ public class Prisim
     }
     public void CreatePerspective(Point camera, Point cameraAngle)
     {
-        System.out.println("\n");
+        //System.out.println("\n");
         for (Point point : points)
         {
             ThreeTwo.CalcPerspective(point, camera, cameraAngle);
         }
         for (Point point : points)
         {
-            System.out.print("3D X value: " + point.getX3());
-            System.out.print(" 3D Y value: " + point.getY3());
-            System.out.print(" 3D Z value: " + point.getZ3());
-            System.out.println("");
+            // System.out.print("3D X value: " + point.getX3());
+            // System.out.print(" 3D Y value: " + point.getY3());
+            // System.out.print(" 3D Z value: " + point.getZ3());
+            // System.out.println("");
         }
     }
     public void ConvertTo2D(Point focalLength, int midX, int midY)
