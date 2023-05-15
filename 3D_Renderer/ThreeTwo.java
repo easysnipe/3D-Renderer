@@ -13,6 +13,7 @@ public class ThreeTwo
                         {0,0,1}};
         double[][] PC = {{(int)(point.getX3() - camera.getX3())}, {(int)(point.getY3() - camera.getY3())}, {(int)(point.getZ3() - camera.getZ3())}};
         double[][] xyz = MatrixMult.mult(MatrixMult.mult(MatrixMult.mult(mat1,mat2), mat3), PC);
+
         point.setX3((int)xyz[0][0]);
         point.setY3((int)xyz[1][0]);
         point.setZ3((int)xyz[2][0]); 
@@ -20,12 +21,12 @@ public class ThreeTwo
     }
     public static void To2DPoint(Point point, Point screen)
     {
-        point.setX2((((screen.getZ3()/point.getZ3()) * point.getX3()) + screen.getX3()) + (1920/2 -200));
-        point.setY2((((screen.getZ3()/point.getZ3()) * point.getY3()) + screen.getY3()) + (1080/2 - 200));
+        point.setX2((int)(((screen.getZ3()/point.getZ3()) * point.getX3()) + screen.getX3()) );
+        point.setY2((int)(((screen.getZ3()/point.getZ3()) * point.getY3()) + screen.getY3()) );
     }
     public static void To2DPointSimple(Point point, double focalLength)
     {
-        point.setX2((int)((focalLength * point.getX3())/(focalLength + point.getZ3()) + (1920/2 - 200)));
-        point.setY2((int)((focalLength * point.getY3())/(focalLength + point.getZ3()) + (1080/2 - 200)));
+        point.setX2((int)(960 + (focalLength * point.getX3())/(focalLength + point.getZ3())));
+        point.setY2((int)(540 + (focalLength * point.getY3())/(focalLength + point.getZ3())));
     }
 }
