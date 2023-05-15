@@ -4,8 +4,8 @@ public class Point
     private double y3;
     private double z3;
 
-    private double x2; //2D x and y values that the 3D values will be projected to
-    private double y2;
+    private int x2; //2D x and y values that the 3D values will be projected to
+    private int y2;
     public Point(double xVal, double yVal, double zVal)
     {
         x3 = xVal;
@@ -41,7 +41,7 @@ public class Point
     {
         return(x2);
     }
-    public void setX2(double xVal)
+    public void setX2(int xVal)
     {
         x2 = xVal;
     }
@@ -49,7 +49,7 @@ public class Point
     {
         return(y2);
     }
-    public void setY2(double yVal)
+    public void setY2(int yVal)
     {
         y2 = yVal;
     }

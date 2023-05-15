@@ -22,17 +22,15 @@ public class Prisim
             // System.out.println("");
         }
     }
-    public void ConvertTo2D(Point focalLength, int midX, int midY)
+    public void ConvertTo2D(double focalLength)
     {
         
         for (Point point : points)
         {
-            ThreeTwo.To2DPoint(point, focalLength);
-            point.setX3(point.getY3() + midX);
-            point.setY3(point.getY3() + midY);
+            ThreeTwo.To2DPointSimple(point, focalLength);
         }
     }
-    public void create3dPoints(int xAdd)
+    public void create3dPoints()
     {
     }
     public void createLines()

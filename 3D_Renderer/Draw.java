@@ -8,8 +8,6 @@ public class Draw extends JPanel implements Runnable
     private Graphics g;
     private Prisim shape;
     private Point d, cO, c;
-    private double focalLength;
-    private int xAdd;
     private Thread drawThread;
     private KeyInputs keyI = new KeyInputs();
     private final int FPS = 60;
@@ -27,7 +25,7 @@ public class Draw extends JPanel implements Runnable
 
         //Set default values
         shape = object;
-        d = new Point(0,0,200); 
+        d = new Point(960,540,200); 
         cO = new Point(0,0,0); 
         c = new Point(0,0,0); 
         int xAdd = 0;
@@ -47,7 +45,7 @@ public class Draw extends JPanel implements Runnable
         while(drawThread != null)
         {
             loopsPassed++;
-            if (loopsPassed >= 10)
+            if (loopsPassed >= 1)
             {
                 loopsPassed = 0;
                 update();
@@ -122,7 +120,7 @@ public class Draw extends JPanel implements Runnable
         }
         else if (keyI.cPress)
         {
-            cO.setX3(cO.getX3() + 1);
+            cO.setX3(cO.getX3() + 0.1);
         }
         else if (keyI.vPress)
         {
@@ -130,7 +128,7 @@ public class Draw extends JPanel implements Runnable
         }
         else if (keyI.bPress)
         {
-            cO.setY3(cO.getY3() + 1);
+            cO.setY3(cO.getY3() + 0.1);
         }
         else if (keyI.nPress)
         {
@@ -138,7 +136,7 @@ public class Draw extends JPanel implements Runnable
         }
         else if (keyI.mPress)
         {
-            cO.setZ3(cO.getX3() + 1);
+            cO.setZ3(cO.getX3() + 0.1);
         }
         else if (keyI.colPress)
         {
@@ -159,11 +157,12 @@ public class Draw extends JPanel implements Runnable
         g.drawString("Camera Angle: (" + cO.getX3() + " ," + cO.getY3() + " ," + cO.getZ3() + " )", 20,35);
         g.drawString("Camera: (" + c.getX3() + " ," + c.getY3() + " ," + c.getZ3() + " )", 20, 50);
 
-        shape.create3dPoints(xAdd);
+        shape.create3dPoints();
         shape.CreatePerspective(c, cO);
-        shape.ConvertTo2D(d, 0, 0);
+        shape.ConvertTo2D(d.getZ3());
         shape.createLines();
         Line[] lines = shape.getLines();
+        Point[] points = shape.getPoints();
 
         //System.out.println(lines[0].getPointA().getX2());
 
@@ -173,9 +172,15 @@ public class Draw extends JPanel implements Runnable
         {
             System.out.println("(" + P.getX2() + " ," + P.getY2() + ")");
         }
+        int count = 0;
         for (Line line : lines)
         {
             g.drawLine((int)line.getPointA().getX2(), (int)line.getPointA().getY2(), (int)line.getPointB().getX2(), (int)line.getPointB().getY2());
+        }
+        for (Point point : points)
+        {
+            g.drawString(count + "", (int)point.getX2(), (int)point.getY2());
+            count++;
         }
         g.dispose();
     }
