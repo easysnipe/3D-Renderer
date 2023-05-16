@@ -25,10 +25,9 @@ public class Draw extends JPanel implements Runnable
 
         //Set default values
         shape = object;
-        d = new Point(960,540,200); 
+        d = new Point(960,540,400); 
         cO = new Point(0,0,0); 
         c = new Point(0,0,0); 
-        int xAdd = 0;
         
     }
     public void startDrawThread()
@@ -36,7 +35,7 @@ public class Draw extends JPanel implements Runnable
         drawThread = new Thread(this);   
         drawThread.start();
     }
-    public void run() 
+    public void run() //Main loop
     {
         int loopsPassed = 0;
         double interval = 1000000000/FPS;
@@ -68,7 +67,7 @@ public class Draw extends JPanel implements Runnable
             catch (InterruptedException e) {}
         }
     }
-    public void update()
+    public void update() //Updates Panel based on input
     {
         if (keyI.aPress)
         {
@@ -124,7 +123,7 @@ public class Draw extends JPanel implements Runnable
         }
         else if (keyI.vPress)
         {
-            cO.setX3(cO.getX3() - 1);
+            cO.setX3(cO.getX3() - 0.1);
         }
         else if (keyI.bPress)
         {
@@ -132,7 +131,7 @@ public class Draw extends JPanel implements Runnable
         }
         else if (keyI.nPress)
         {
-            cO.setY3(cO.getY3() - 1);
+            cO.setY3(cO.getY3() - 0.1);
         }
         else if (keyI.mPress)
         {
@@ -140,11 +139,11 @@ public class Draw extends JPanel implements Runnable
         }
         else if (keyI.colPress)
         {
-            cO.setZ3(cO.getX3() - 1);
+            cO.setZ3(cO.getX3() - 0.1);
         }
         else if (keyI.backPress)
         {
-            d = new Point(0,0,200); 
+            d = new Point(0,0,400); 
             cO = new Point(0,0,0); 
             c = new Point(0,0,0); 
         }
@@ -154,17 +153,20 @@ public class Draw extends JPanel implements Runnable
         super.paintComponent(g);
 
         g.drawString("Dispaly: (" + d.getX3() + " ," + d.getY3() + " ," + d.getZ3() + " )", 20,20);
-        g.drawString("Camera Angle: (" + cO.getX3() + " ," + cO.getY3() + " ," + cO.getZ3() + " )", 20,35);
+        g.drawString("Camera Angle: (" + (int)cO.getX3() + " ," + (int)cO.getY3() + " ," + (int)cO.getZ3() + " )", 20,35);
         g.drawString("Camera: (" + c.getX3() + " ," + c.getY3() + " ," + c.getZ3() + " )", 20, 50);
+        g.drawString("Controls (WIP): ", 20,1000);
+        g.drawString("Camera: Right = A, Left = S, Up = D, Down = F", 20,1015);
+        g.drawString("FOV Adjustment: + = z, - = x", 20,1030);
+        g.drawString("Rotation: Right = C, Left =V, Up = B, Down = N", 20,1045);
+
 
         shape.create3dPoints();
         shape.CreatePerspective(c, cO);
         shape.ConvertTo2D(d.getZ3());
         shape.createLines();
         Line[] lines = shape.getLines();
-        Point[] points = shape.getPoints();
-
-        //System.out.println(lines[0].getPointA().getX2());
+        Point[] points = shape.getPoints(); 
 
         g.setColor(new Color(0,0,0));
         System.out.println("\n");
