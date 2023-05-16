@@ -19,7 +19,7 @@ public class ThreeTwo
         point.setZ3((int)xyz[2][0]); 
         
     }
-    public static void To2DPoint(Point point, Point screen)
+    public static void To2DPoint(Point point, Point screen) //Projects 3D Point onto Screen
     {
         point.setX2((int)(((screen.getZ3()/point.getZ3()) * point.getX3()) + screen.getX3()) );
         point.setY2((int)(((screen.getZ3()/point.getZ3()) * point.getY3()) + screen.getY3()) );
