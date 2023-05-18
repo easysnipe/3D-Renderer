@@ -8,7 +8,7 @@ public class KeyInputs implements KeyListener
     public void keyPressed(KeyEvent e)
     {
         int code = e.getKeyCode();
-
+        System.out.print("Pressed");
         if (code == KeyEvent.VK_A)
         {
             aPress = true;

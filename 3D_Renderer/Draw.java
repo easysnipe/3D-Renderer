@@ -10,6 +10,7 @@ public class Draw extends JPanel implements Runnable
     private Point d, cO, c;
     private Thread drawThread;
     private KeyInputs keyI = new KeyInputs();
+    private MouseInputs mouseI = new MouseInputs();
     private final int FPS = 60;
     public Draw(Prisim object) throws InterruptedException
     {
@@ -20,6 +21,7 @@ public class Draw extends JPanel implements Runnable
 
         TimeUnit.MILLISECONDS.sleep(100);
         this.addKeyListener(keyI);
+        this.addMouseListener(mouseI);
         this.setFocusable(true);
         this.requestFocus();
 
@@ -60,7 +62,6 @@ public class Draw extends JPanel implements Runnable
             }
             try
             {
-                System.out.println(timeLeft);
                 Thread.sleep((long)timeLeft);
                 draw += interval;
             }
@@ -147,11 +148,27 @@ public class Draw extends JPanel implements Runnable
             cO = new Point(0,0,0); 
             c = new Point(0,0,0); 
         }
+        if (mouseI.cubeClick)
+        {
+            if (shape instanceof Pyramid)
+            {
+                shape = new Cube(100);
+            }
+        }
+        else if (mouseI.pyramidClick)
+        {
+            if (shape instanceof Cube)
+            {
+                shape = new Pyramid(100);
+            }
+        }
+
     }
     public void paintComponent(Graphics g) 
     {
         super.paintComponent(g);
 
+        g.setFont(new Font("Arial", Font.PLAIN, 12));
         g.drawString("Dispaly: (" + d.getX3() + " ," + d.getY3() + " ," + d.getZ3() + " )", 20,20);
         g.drawString("Camera Angle: (" + (int)cO.getX3() + " ," + (int)cO.getY3() + " ," + (int)cO.getZ3() + " )", 20,35);
         g.drawString("Camera: (" + c.getX3() + " ," + c.getY3() + " ," + c.getZ3() + " )", 20, 50);
@@ -160,7 +177,14 @@ public class Draw extends JPanel implements Runnable
         g.drawString("FOV Adjustment: + = z, - = x", 20,1030);
         g.drawString("Rotation: Right = C, Left =V, Up = B, Down = N", 20,1045);
 
-
+        g.fillRect(1750, 20, 150,50);
+        g.fillRect(1750, 90, 150, 50);
+        
+        g.setColor(new Color(255,255,255));
+        g.setFont(new Font("Arial", Font.PLAIN, 30));
+        g.drawString("Cube", 1787, 60);
+        g.drawString("Pyramid", 1770, 130);
+        
         shape.create3dPoints();
         shape.CreatePerspective(c, cO);
         shape.ConvertTo2D(d.getZ3());
@@ -169,11 +193,6 @@ public class Draw extends JPanel implements Runnable
         Point[] points = shape.getPoints(); 
 
         g.setColor(new Color(0,0,0));
-        System.out.println("\n");
-        for (Point P : shape.getPoints())
-        {
-            System.out.println("(" + P.getX2() + " ," + P.getY2() + ")");
-        }
         int count = 0;
         for (Line line : lines)
         {

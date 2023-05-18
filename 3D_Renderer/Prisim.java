@@ -1,3 +1,4 @@
+
 public class Prisim 
 {
     protected double scale;
