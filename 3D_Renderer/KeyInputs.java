@@ -76,7 +76,7 @@ public class KeyInputs implements KeyListener
         {
             mPress = true;
         }
-        if (code == KeyEvent.VK_LESS)
+        if (code == KeyEvent.VK_COMMA)
         {
             lessPress = true;
         }
@@ -157,7 +157,7 @@ public class KeyInputs implements KeyListener
         {
             mPress = false;
         }
-        if (code == KeyEvent.VK_LESS)
+        if (code == KeyEvent.VK_COMMA)
         {
             lessPress = false;
         }

@@ -185,10 +185,6 @@ public class Draw extends JPanel implements Runnable
         g.drawString("Cube", 1787, 60);
         g.drawString("Pyramid", 1770, 130);
         
-        if (shape.getCode() == 0)
-        {
-            System.out.print("is Cube");
-        }
         shape.create3dPoints();
         shape.CreatePerspective(c, cO);
         shape.ConvertTo2D(d.getZ3());
@@ -202,6 +198,7 @@ public class Draw extends JPanel implements Runnable
         {
             g.drawLine((int)line.getPointA().getX2(), (int)line.getPointA().getY2(), (int)line.getPointB().getX2(), (int)line.getPointB().getY2());
         }
+        g.setFont(new Font("Arial", Font.PLAIN, 12));
         for (Point point : points)
         {
             g.drawString(count + "", (int)point.getX2(), (int)point.getY2());

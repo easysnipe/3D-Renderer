@@ -8,7 +8,7 @@ public class Main
         win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         win.setTitle("3D Renderer");
 
-        Prisim pyramid = new Pyramid(100);
+        Prisim pyramid = new Hexagonal(100);
         Draw threeD = new Draw(pyramid);
         win.add(threeD);
         win.pack();
