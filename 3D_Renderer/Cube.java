@@ -33,5 +33,9 @@ public class Cube extends Prisim
         edges[10] = new Line(points[5], points[6]);
         edges[11] = new Line(points[6], points[7]);//
     }
+    public int getNum()
+    {
+        return 0;
+    }
 
 }

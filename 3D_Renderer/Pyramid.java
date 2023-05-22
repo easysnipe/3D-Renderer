@@ -25,4 +25,8 @@ public class Pyramid extends Cube
         edges[6] = new Line(points[2], points[4]);
         edges[7] = new Line(points[3], points[4]);
     }
+    public int getCode()
+    {
+        return 1;
+    }
 }

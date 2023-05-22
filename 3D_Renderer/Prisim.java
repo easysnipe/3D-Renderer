@@ -53,4 +53,8 @@ public class Prisim
     {
         scale = size;
     }
+    public int getCode()
+    {
+        return -1;
+    }
 }

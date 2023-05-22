@@ -74,39 +74,39 @@ public class Draw extends JPanel implements Runnable
         {
             c.setX3(c.getX3() + 1);
         } 
-        else if (keyI.sPress)
+        if (keyI.sPress)
         {
             c.setX3(c.getX3() - 1);
         }
-        else if (keyI.dPress)
+        if (keyI.dPress)
         {
             c.setY3(c.getY3() + 1);
         }
-        else if (keyI.fPress)
+        if (keyI.fPress)
         {
             c.setY3(c.getY3() - 1);
         }
-        else if (keyI.gPress)
+        if (keyI.gPress)
         {
             c.setZ3(c.getZ3() + 1);
         }
-        else if (keyI.hPress)
+        if (keyI.hPress)
         {
             c.setZ3(c.getZ3() - 1);
         }
-        else if (keyI.jPress)
+        if (keyI.jPress)
         {
             d.setX3(d.getX3() + 1);
         }
-        else if (keyI.kPress)
+        if (keyI.kPress)
         {
             d.setX3(d.getX3() - 1);
         }
-        else if (keyI.lPress)
+        if (keyI.lPress)
         {
             d.setY3(d.getY3() + 1);
         }
-        else if (keyI.semiPress)
+        if (keyI.semiPress)
         {
             d.setY3(d.getY3() - 1);
         }
@@ -114,35 +114,35 @@ public class Draw extends JPanel implements Runnable
         {
             d.setZ3(d.getZ3() + 1);
         } 
-        else if (keyI.xPress)
+        if (keyI.xPress)
         {
             d.setZ3(d.getZ3() - 1);
         }
-        else if (keyI.cPress)
+        if (keyI.cPress)
         {
             cO.setX3(cO.getX3() + 0.1);
         }
-        else if (keyI.vPress)
+        if (keyI.vPress)
         {
             cO.setX3(cO.getX3() - 0.1);
         }
-        else if (keyI.bPress)
+        if (keyI.bPress)
         {
             cO.setY3(cO.getY3() + 0.1);
         }
-        else if (keyI.nPress)
+        if (keyI.nPress)
         {
             cO.setY3(cO.getY3() - 0.1);
         }
-        else if (keyI.mPress)
+        if (keyI.mPress)
         {
-            cO.setZ3(cO.getX3() + 0.1);
+            cO.setZ3(cO.getZ3() + 0.1);
         }
-        else if (keyI.colPress)
+        if (keyI.lessPress)
         {
-            cO.setZ3(cO.getX3() - 0.1);
+            cO.setZ3(cO.getZ3() - 0.1);
         }
-        else if (keyI.backPress)
+        if (keyI.backPress)
         {
             d = new Point(0,0,400); 
             cO = new Point(0,0,0); 
@@ -150,14 +150,14 @@ public class Draw extends JPanel implements Runnable
         }
         if (mouseI.cubeClick)
         {
-            if (shape instanceof Pyramid)
+            if (shape.getCode() != 0)
             {
                 shape = new Cube(100);
             }
         }
         else if (mouseI.pyramidClick)
         {
-            if (shape instanceof Cube)
+            if (shape.getCode() != 1)
             {
                 shape = new Pyramid(100);
             }
@@ -185,6 +185,10 @@ public class Draw extends JPanel implements Runnable
         g.drawString("Cube", 1787, 60);
         g.drawString("Pyramid", 1770, 130);
         
+        if (shape.getCode() == 0)
+        {
+            System.out.print("is Cube");
+        }
         shape.create3dPoints();
         shape.CreatePerspective(c, cO);
         shape.ConvertTo2D(d.getZ3());

@@ -3,12 +3,11 @@ import java.awt.event.KeyEvent;
 
 public class KeyInputs implements KeyListener
 {
-    public boolean aPress, sPress, dPress, fPress, gPress, hPress, zPress, xPress, jPress, kPress, lPress, semiPress, cPress, vPress, bPress, nPress, mPress, colPress, backPress;
+    public boolean aPress, sPress, dPress, fPress, gPress, hPress, zPress, xPress, jPress, kPress, lPress, semiPress, cPress, vPress, bPress, nPress, mPress, lessPress, backPress;
     public void keyTyped(KeyEvent e) {}
     public void keyPressed(KeyEvent e)
     {
         int code = e.getKeyCode();
-        System.out.print("Pressed");
         if (code == KeyEvent.VK_A)
         {
             aPress = true;
@@ -77,9 +76,9 @@ public class KeyInputs implements KeyListener
         {
             mPress = true;
         }
-        if (code == KeyEvent.VK_COLON)
+        if (code == KeyEvent.VK_LESS)
         {
-            colPress = true;
+            lessPress = true;
         }
         if (code == KeyEvent.VK_BACK_SPACE)
         {
@@ -158,9 +157,9 @@ public class KeyInputs implements KeyListener
         {
             mPress = false;
         }
-        if (code == KeyEvent.VK_COLON)
+        if (code == KeyEvent.VK_LESS)
         {
-            colPress = false;
+            lessPress = false;
         }
         if (code == KeyEvent.VK_BACK_SPACE)
         {
