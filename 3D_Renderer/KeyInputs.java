@@ -5,7 +5,7 @@ public class KeyInputs implements KeyListener
 {
     public boolean aPress, sPress, dPress, fPress, gPress, hPress, zPress, xPress, jPress, kPress, lPress, semiPress, cPress, vPress, bPress, nPress, mPress, lessPress, backPress;
     public void keyTyped(KeyEvent e) {}
-    public void keyPressed(KeyEvent e)
+    public void keyPressed(KeyEvent e) //Triggers update if one of the keys are pressed
     {
         int code = e.getKeyCode();
         if (code == KeyEvent.VK_A)

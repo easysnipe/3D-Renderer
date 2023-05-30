@@ -1,3 +1,5 @@
+//Stores the two points for a line
+
 public class Line
 {
     private Point a;

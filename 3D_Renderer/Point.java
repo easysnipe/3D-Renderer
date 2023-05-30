@@ -1,3 +1,5 @@
+//Stores the x, y and z of a 3D point along with the converted x and y of a 2D point
+
 public class Point
 {
     private double x3; //3D x,y and z values 

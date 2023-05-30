@@ -1,6 +1,6 @@
 public class ThreeTwo
 {
-    public static void CalcPerspective(Point point, Point camera, Point cameraAngle)
+    public static void CalcPerspective(Point point, Point camera, Point cameraAngle) // Calculates points Rotation and moves point based on camera location
     {
         double[][] mat1 = {{1,0,0},
                         {0,Math.cos(cameraAngle.getX3()), Math.sin(cameraAngle.getX3())},
@@ -19,12 +19,12 @@ public class ThreeTwo
         point.setZ3((int)xyz[2][0]); 
         
     }
-    public static void To2DPoint(Point point, Point screen) //Projects 3D Point onto Screen
-    {
-        point.setX2((int)(((screen.getZ3()/point.getZ3()) * point.getX3()) + screen.getX3()) );
-        point.setY2((int)(((screen.getZ3()/point.getZ3()) * point.getY3()) + screen.getY3()) );
-    }
-    public static void To2DPointSimple(Point point, double focalLength)
+    // public static void To2DPoint(Point point, Point screen) //Projects 3D Point onto Screen
+    // {
+    //     point.setX2((int)(((screen.getZ3()/point.getZ3()) * point.getX3()) + screen.getX3()) );
+    //     point.setY2((int)(((screen.getZ3()/point.getZ3()) * point.getY3()) + screen.getY3()) );
+    // }
+    public static void To2DPoint(Point point, double focalLength) //Projects 3D point onto Screen
     {
         point.setX2((int)(960 + (focalLength * point.getX3())/(focalLength + point.getZ3())));
         point.setY2((int)(540 + (focalLength * point.getY3())/(focalLength + point.getZ3())));
