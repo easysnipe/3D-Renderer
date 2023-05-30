@@ -3,7 +3,7 @@ import java.awt.event.MouseEvent;
 
 public class MouseInputs implements MouseListener
 {
-    boolean cubeClick, pyramidClick;
+    boolean cubeClick, pyramidClick, hexagonalClick;
 
     public void mouseEntered(MouseEvent e)
     {
@@ -31,11 +31,17 @@ public class MouseInputs implements MouseListener
         {
             pyramidClick = true;
         }
+        else if (e.getX() >= 1750 && e.getX() <= 1900 && e.getY() >= 160 && e.getY() <= 210)
+        {
+            hexagonalClick = true;
+        }
+        
     }
 
     public void mouseReleased(MouseEvent e)
     {
         cubeClick = false;
         pyramidClick = false;
+        hexagonalClick = false;
     }
 }

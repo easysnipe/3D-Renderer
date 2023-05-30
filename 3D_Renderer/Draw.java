@@ -165,6 +165,14 @@ public class Draw extends JPanel implements Runnable
                 shape = new Pyramid(size);
             }
         }
+        else if (mouseI.hexagonalClick)
+        {
+            if (shape.getCode() != 2)
+            {
+                double size = shape.getSize();
+                shape = new Hexagonal(size);
+            }
+        }
 
     }
     public void paintComponent(Graphics g) //Draws all of the lines and buttons
@@ -182,11 +190,13 @@ public class Draw extends JPanel implements Runnable
 
         g.fillRect(1750, 20, 150,50);
         g.fillRect(1750, 90, 150, 50);
+        g.fillRect(1750, 160, 150, 50);
         
         g.setColor(new Color(255,255,255)); //Buttons
         g.setFont(new Font("Arial", Font.PLAIN, 30));
         g.drawString("Cube", 1787, 60);
         g.drawString("Pyramid", 1770, 130);
+        g.drawString("Hexagonal", 1750, 200);
         
         shape.create3dPoints();
         shape.CreatePerspective(c, cO);

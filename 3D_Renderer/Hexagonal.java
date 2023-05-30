@@ -22,9 +22,9 @@ public class Hexagonal extends Prisim
         points[11] = new Point(scale * 3,scale * 3, scale * 1.5);
         for (Point point : points)
         {
-            point.setX3(point.getX3() / 3);
-            point.setY3(point.getY3() / 3);
-            point.setZ3(point.getZ3() / 3);
+            point.setX3(point.getX3() / 2);
+            point.setY3(point.getY3() / 2);
+            point.setZ3(point.getZ3() / 2);
         }
     
     }
@@ -48,5 +48,9 @@ public class Hexagonal extends Prisim
         edges[15] = new Line(points[10], points[4]);
         edges[16] = new Line(points[11], points[5]);
         edges[17] = new Line(points[6], points[0]);
+    }
+    public int getCode()
+    {
+        return 2;
     }
 }
