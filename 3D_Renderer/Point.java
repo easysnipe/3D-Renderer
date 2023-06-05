@@ -14,6 +14,7 @@ public class Point
         y3 = yVal;
         z3 = zVal;
     }
+    //Getters, setters:
     public double getX3()
     {
         return(x3);

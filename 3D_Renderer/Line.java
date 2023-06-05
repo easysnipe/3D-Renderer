@@ -4,11 +4,12 @@ public class Line
 {
     private Point a;
     private Point b;
-    public Line(Point pointA, Point pointB)
+    public Line(Point pointA, Point pointB) 
     {
         a = pointA;
         b = pointB;
     }
+    // Getters, setters
     public Point getPointA()
     {
         return(a);

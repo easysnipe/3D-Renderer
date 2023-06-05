@@ -1,5 +1,6 @@
 public class ThreeTwo
 {
+    //Takes the point camera position and camera angle an changes points 3D X,Y and Z values
     public static void CalcPerspective(Point point, Point camera, Point cameraAngle) // Calculates points Rotation and moves point based on camera location
     {
         double[][] mat1 = {{1,0,0},
@@ -19,14 +20,10 @@ public class ThreeTwo
         point.setZ3((int)xyz[2][0]); 
         
     }
-    // public static void To2DPoint(Point point, Point screen) //Projects 3D Point onto Screen
-    // {
-    //     point.setX2((int)(((screen.getZ3()/point.getZ3()) * point.getX3()) + screen.getX3()) );
-    //     point.setY2((int)(((screen.getZ3()/point.getZ3()) * point.getY3()) + screen.getY3()) );
-    // }
-    public static void To2DPoint(Point point, double focalLength) //Projects 3D point onto Screen
+    //Takes point resolution, the point and the focal length and changes the points 2D X and Y values
+    public static void To2DPoint(Point point, double focalLength, int[] res) //Projects 3D point onto Screen
     {
-        point.setX2((int)(960 + (focalLength * point.getX3())/(focalLength + point.getZ3())));
-        point.setY2((int)(540 + (focalLength * point.getY3())/(focalLength + point.getZ3())));
+        point.setX2((int)(res[0] / 2 + (focalLength * point.getX3())/(focalLength + point.getZ3()))); //1280x800
+        point.setY2((int)(res[1] / 2 + (focalLength * point.getY3())/(focalLength + point.getZ3())));
     }
 }

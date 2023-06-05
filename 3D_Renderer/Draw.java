@@ -1,28 +1,29 @@
 import java.awt.*;
 import javax.swing.*;
 import java.util.concurrent.TimeUnit;
-import java.awt.event.*;
 
 public class Draw extends JPanel implements Runnable
 {
-    private Graphics g;
     private Prisim shape;
     private Point d, cO, c;
     private Thread drawThread;
     private KeyInputs keyI = new KeyInputs();
     private MouseInputs mouseI = new MouseInputs();
     private final int FPS = 60;
-    public Draw(Prisim object) throws InterruptedException
+    private int[] res;
+    public Draw(Prisim object, int[] resolution) throws InterruptedException
     {
         //Create window and add needed functions
-        this.setPreferredSize(new Dimension(1920,1080));
+        res = resolution;
         this.setLocation(0,0);
         this.setDoubleBuffered(true);
         this.setFocusTraversalKeysEnabled(false);
+        this.setPreferredSize(new Dimension(res[0], res[1]));
 
         TimeUnit.MILLISECONDS.sleep(100);
         this.addKeyListener(keyI);
         this.addMouseListener(mouseI);
+        mouseI.resolution = res;
         this.setFocusable(true);
         this.requestFocus();
 
@@ -33,7 +34,7 @@ public class Draw extends JPanel implements Runnable
         c = new Point(0,0,0); 
         
     }
-    public void startDrawThread() 
+    public void startDrawThread() //Start the main loop
     {
         drawThread = new Thread(this);   
         drawThread.start();
@@ -55,13 +56,14 @@ public class Draw extends JPanel implements Runnable
             }
             long time = System.nanoTime();
 
-            double timeLeft = draw - System.nanoTime(); //Makes sure that the framrate is a constant 60 FPS
-            timeLeft = timeLeft/1000000;
+            double timeLeft = draw - time; //Makes sure that the framrate is a constant 60 FPS
+            timeLeft = timeLeft/1000000; 
             if (timeLeft < 0)
             {
                 timeLeft = 0;
             }
-            try
+            //If there is still left by the time that the objects are drawn this makes the program wait in order to keep framrate stable
+            try 
             {
                 Thread.sleep((long)timeLeft);
                 draw += interval;
@@ -73,76 +75,52 @@ public class Draw extends JPanel implements Runnable
     {
         if (keyI.aPress)
         {
-            c.setX3(c.getX3() + 1);
+            c.setX3(c.getX3() - 1);
         } 
         if (keyI.sPress)
         {
-            c.setX3(c.getX3() - 1);
+            c.setZ3(c.getZ3() - 1);
         }
         if (keyI.dPress)
         {
-            c.setY3(c.getY3() + 1);
+            c.setX3(c.getX3() + 1);
         }
-        if (keyI.fPress)
-        {
-            c.setY3(c.getY3() - 1);
-        }
-        if (keyI.gPress)
+        if (keyI.wPress)
         {
             c.setZ3(c.getZ3() + 1);
         }
-        if (keyI.hPress)
+        if (keyI.qPress)
         {
-            c.setZ3(c.getZ3() - 1);
+            c.setY3(c.getY3() + 1);
         }
-        if (keyI.jPress)
+        if (keyI.ePress)
         {
-            shape.setSize(shape.getSize() + 1);
+            c.setY3(c.getY3() - 1);
         }
-        if (keyI.kPress)
-        {
-            shape.setSize(shape.getSize() - 1);
-        }
-        if (keyI.lPress)
-        {
-            d.setY3(d.getY3() + 1);
-        }
-        if (keyI.semiPress)
-        {
-            d.setY3(d.getY3() - 1);
-        }
-        if (keyI.zPress)
-        {
-            d.setZ3(d.getZ3() + 1);
-        } 
-        if (keyI.xPress)
-        {
-            d.setZ3(d.getZ3() - 1);
-        }
-        if (keyI.cPress)
-        {
-            cO.setX3(cO.getX3() + 0.1);
-        }
-        if (keyI.vPress)
-        {
-            cO.setX3(cO.getX3() - 0.1);
-        }
-        if (keyI.bPress)
-        {
-            cO.setY3(cO.getY3() + 0.1);
-        }
-        if (keyI.nPress)
+        if (keyI.laPress)
         {
             cO.setY3(cO.getY3() - 0.1);
         }
-        if (keyI.mPress)
+        if (keyI.raPress)
         {
-            cO.setZ3(cO.getZ3() + 0.1);
+            cO.setY3(cO.getY3() + 0.1);
         }
-        if (keyI.lessPress)
+        if (keyI.uaPress)
+        {
+            cO.setX3(cO.getX3() + 0.1); 
+        }
+        if (keyI.daPress)
+        {
+            cO.setX3(cO.getX3() - 0.1);
+        }
+        if (keyI.lePress)
         {
             cO.setZ3(cO.getZ3() - 0.1);
         }
+        if (keyI.grPress)
+        {
+            cO.setZ3(cO.getZ3() + 0.1);
+        } 
         if (keyI.backPress) // Reset all values to defaults
         {
             d = new Point(0,0,400); 
@@ -175,32 +153,35 @@ public class Draw extends JPanel implements Runnable
         }
 
     }
-    public void paintComponent(Graphics g) //Draws all of the lines and buttons
+    //Draws all of the lines and buttons
+    //Uses the Prisim object to draw the 3D object to the screen
+    public void paintComponent(Graphics g) 
     {
         super.paintComponent(g);
 
         g.setFont(new Font("Arial", Font.PLAIN, 12));
-        g.drawString("Dispaly: (" + d.getX3() + " ," + d.getY3() + " ," + d.getZ3() + " )", 20,20); //Status text
+        g.drawString("Focal Length: (" + d.getZ3() + " )", 20,20); //Status text adn controls
         g.drawString("Camera Angle: (" + (int)cO.getX3() + " ," + (int)cO.getY3() + " ," + (int)cO.getZ3() + " )", 20,35);
         g.drawString("Camera: (" + c.getX3() + " ," + c.getY3() + " ," + c.getZ3() + " )", 20, 50);
-        g.drawString("Controls (WIP): ", 20,1000);
-        g.drawString("Camera: Right = A, Left = S, Up = D, Down = F", 20,1015);
+        g.drawString("Controls (WIP): ", 20,res[1] - 80);
+        g.drawString("Camera: Right = D, Left = A, Up = E, Down = Q, Forward = W, Backwards = S", 20,res[1] - 65);
         g.drawString("FOV Adjustment: + = z, - = x", 20,1030);
-        g.drawString("Rotation: Right = C, Left =V, Up = B, Down = N", 20,1045);
+        g.drawString("Rotation: Arrow keys ", 20,res[1] - 35);
 
-        g.fillRect(1750, 20, 150,50);
-        g.fillRect(1750, 90, 150, 50);
-        g.fillRect(1750, 160, 150, 50);
+        g.fillRect(res[0] - 170, 20, 150,50); //Buttons
+        g.fillRect(res[0] - 170, 90, 150, 50);
+        g.fillRect(res[0] - 170, 160, 150, 50);
         
         g.setColor(new Color(255,255,255)); //Buttons
         g.setFont(new Font("Arial", Font.PLAIN, 30));
-        g.drawString("Cube", 1787, 60);
-        g.drawString("Pyramid", 1770, 130);
-        g.drawString("Hexagonal", 1750, 200);
+        g.drawString("Cube", res[0] - 133, 60);
+        g.drawString("Pyramid", res[0] - 150, 130);
+        g.drawString("Hexagonal", res[0] - 170, 200);
+
         
         shape.create3dPoints();
         shape.CreatePerspective(c, cO);
-        shape.ConvertTo2D(d.getZ3());
+        shape.ConvertTo2D(d.getZ3(), res);
         shape.createLines();
         Line[] lines = shape.getLines();
         Point[] points = shape.getPoints(); 

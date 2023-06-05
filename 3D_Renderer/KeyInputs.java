@@ -3,7 +3,7 @@ import java.awt.event.KeyEvent;
 
 public class KeyInputs implements KeyListener
 {
-    public boolean aPress, sPress, dPress, fPress, gPress, hPress, zPress, xPress, jPress, kPress, lPress, semiPress, cPress, vPress, bPress, nPress, mPress, lessPress, backPress;
+    public boolean wPress, sPress, aPress, dPress, qPress, ePress, raPress, uaPress, daPress, laPress, backPress, grPress, lePress;
     public void keyTyped(KeyEvent e) {}
     public void keyPressed(KeyEvent e) //Triggers update if one of the keys are pressed
     {
@@ -20,75 +20,50 @@ public class KeyInputs implements KeyListener
         {
             dPress = true;
         }
-        if (code == KeyEvent.VK_F)
+        if (code == KeyEvent.VK_W)
         {
-            fPress = true;
+            wPress = true;
         }
-        if (code == KeyEvent.VK_G)
+        if (code == KeyEvent.VK_Q)
         {
-            gPress = true;
+            qPress = true;
         }
-        if (code == KeyEvent.VK_H)
+        if (code == KeyEvent.VK_E)
         {
-            hPress = true;
+            ePress = true;
         }
-        if (code == KeyEvent.VK_J)
+        if (code == KeyEvent.VK_LEFT)
         {
-            jPress = true;
+            laPress = true;
         }
-        if (code == KeyEvent.VK_K)
+        if (code == KeyEvent.VK_RIGHT)
         {
-            kPress = true;
+            raPress = true;
         }
-        if (code == KeyEvent.VK_L)
+        if (code == KeyEvent.VK_UP)
         {
-            lPress = true;
+            uaPress = true;
         }
-        if (code == KeyEvent.VK_SEMICOLON)
+        if (code == KeyEvent.VK_DOWN)
         {
-            semiPress = true;
-        }
-        if (code == KeyEvent.VK_Z)
-        {
-            zPress = true;
-        }
-        if (code == KeyEvent.VK_X)
-        {
-            xPress = true;
-        }
-        if (code == KeyEvent.VK_C)
-        {
-            cPress = true;
-        }
-        if (code == KeyEvent.VK_V)
-        {
-            vPress = true;
-        }
-        if (code == KeyEvent.VK_B)
-        {
-            bPress = true;
-        }
-        if (code == KeyEvent.VK_N)
-        {
-            nPress = true;
-        }
-        if (code == KeyEvent.VK_M)
-        {
-            mPress = true;
+            daPress = true;
         }
         if (code == KeyEvent.VK_COMMA)
         {
-            lessPress = true;
+            lePress = true;
+        }
+        if (code == KeyEvent.VK_PERIOD)
+        {
+            grPress = true;
         }
         if (code == KeyEvent.VK_BACK_SPACE)
         {
             backPress = true;
         }
     }
-    public void keyReleased(KeyEvent e)
+    public void keyReleased(KeyEvent e) //Set to false after key is released so it is no longer triggering update
     {
         int code = e.getKeyCode();
-        
         if (code == KeyEvent.VK_A)
         {
             aPress = false;
@@ -101,69 +76,46 @@ public class KeyInputs implements KeyListener
         {
             dPress = false;
         }
-        if (code == KeyEvent.VK_F)
+        if (code == KeyEvent.VK_W)
         {
-            fPress = false;
+            wPress = false;
         }
-        if (code == KeyEvent.VK_G)
+        if (code == KeyEvent.VK_LEFT)
         {
-            gPress = false;
+            laPress = false;
         }
-        if (code == KeyEvent.VK_H)
+        if (code == KeyEvent.VK_RIGHT)
         {
-            hPress = false;
+            raPress = false;
         }
-        if (code == KeyEvent.VK_J)
+        if (code == KeyEvent.VK_UP)
         {
-            jPress = false;
+            uaPress = false;
         }
-        if (code == KeyEvent.VK_K)
+        if (code == KeyEvent.VK_DOWN)
         {
-            kPress = false;
-        }
-        if (code == KeyEvent.VK_L)
-        {
-            lPress = false;
-        }
-        if (code == KeyEvent.VK_SEMICOLON)
-        {
-            semiPress = false;
-        }
-        if (code == KeyEvent.VK_Z)
-        {
-            zPress = false;
-        }
-        if (code == KeyEvent.VK_X)
-        {
-            xPress = false;
-        }
-        if (code == KeyEvent.VK_C)
-        {
-            cPress = false;
-        }
-        if (code == KeyEvent.VK_V)
-        {
-            vPress = false;
-        }
-        if (code == KeyEvent.VK_B)
-        {
-            bPress = false;
-        }
-        if (code == KeyEvent.VK_N)
-        {
-            nPress = false;
-        }
-        if (code == KeyEvent.VK_M)
-        {
-            mPress = false;
+            daPress = false;
         }
         if (code == KeyEvent.VK_COMMA)
         {
-            lessPress = false;
+            lePress = false;
+        }
+        if (code == KeyEvent.VK_PERIOD)
+        {
+            grPress = false;
         }
         if (code == KeyEvent.VK_BACK_SPACE)
         {
             backPress = false;
         }
+        if (code == KeyEvent.VK_Q)
+        {
+            qPress = false;
+        }
+        if (code == KeyEvent.VK_E)
+        {
+            ePress = false;
+        }
+        
     }
 }

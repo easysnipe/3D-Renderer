@@ -20,12 +20,12 @@ public class Prisim
         }
     }
 
-    public void ConvertTo2D(double focalLength) //Projects the 3D points onto the 2D screen
+    public void ConvertTo2D(double focalLength, int[] res) //Projects the 3D points onto the 2D screen
     {
         
         for (Point point : points)
         {
-            ThreeTwo.To2DPoint(point, focalLength);
+            ThreeTwo.To2DPoint(point, focalLength, res);
         }
     }
 
@@ -36,7 +36,7 @@ public class Prisim
     public void createLines() //Defines all of the edges
     {
     }
-
+    //Getters setters:
     public Line[] getLines()
     {
         return(edges);

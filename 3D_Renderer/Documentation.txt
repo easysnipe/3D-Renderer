@@ -1,0 +1,55 @@
+Description:
+	This is a basic program that allows you to look at 3D objects utilizing java swing, 
+	there are three objects a cube, pyramid and a hexagonal prisim. You can switch the 
+	objects in the upper righthand corner with the buttons with the corresponind object.
+	When veiwing an object you can move the camera in the x y or z axis, you can also 
+	rotate the object in all three axises. 
+	
+	
+Controls:
+	Rotatation:
+		In x axis:
+			Forward = Up Arrow
+			Backwards = Down Arrow
+		In y axis:
+			Forward = Right Arrow
+			Backwards = Left Arrow
+		In z axis:
+			Forward = <
+			Backwards = >
+	
+	Camera movement:
+		In x axis:
+			Forward = A
+			Backwards = D
+		In y axis:
+			Forward = Q
+			Backwards = E
+		In z axis:
+			Forward = W
+			Backwards = S
+
+How a point is represented:
+	A point is represented as a Point object from the Point class, the point class just holds 5 values, the 3D x y and z of the point and the 2D x and y of it. The class also contains getters and setters to change these
+	values.
+
+How a line is represented:
+	A line is represented as a Line object from the Line class, a Line holds two Point objects and contains getters and setters to access these points.
+	
+How a point is projected:
+	A point that is part of an object will first have its perspective calculated with a formula that can be found here: https://en.wikipedia.org/wiki/3D_projection#Mathematical_formula
+	The formula takes in a point, a camera oreintation and a camera position which in this program is represeted by Point objects in this program. This class with the input will change
+	the 3D points x, y and z to represent camera postition and rotation. After the points perspective is calculated then it needs to be projected from 3D points into 2D points so it can
+	be represented on a screen. This uses a formula that takes in a point and focal length and then sets the 2D x and y of the point using this formula: https://en.wikipedia.org/wiki/3D_projection#Weak_perspective_projection.
+	All of this is calculated in the class ThreeTwo.
+
+How a 3D object is defined: 
+	Every object in this program inherits a super class Prisim, Prisim contatins all of the basic classes that each object needs, for example the CreatePerspective class or the ConvertTo2D class. For an object to work 
+	it only needs four classes, the Constructor, create3dPoints, createLines and getCode. The constructor needs to take scale and send to the super class and instatiate the Points array and Edges array. The create3dPoints
+	needs to fill the Points array with points (usually negative and positive numbers multiplying scale for each points x, y and z). createLines needs to fill the array of lines in order for the program to know which points
+	are connected by a line. Finally the getCode class needs to return a unique number so the program can determine which 3D object it is.
+	
+How a Object is drawn to the screen:
+	The paint component method in the draw class is what draws the lines of the object to the screen and all the ui components. This is done 60 times a second in the draw thread using the main loop in the run method. The 
+	paint component method first takes the lines array from the object and the points array, with the points array it prints the number of the point at every single points location. Then the lines are drawn using the lines
+	array, a loop gets the x and y points of both points of a line and uses them to draw a line to the screen. Then the whole object should be drawn to the screen.
